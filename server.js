@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
+const { create_user, get_users } = require('./script');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,13 +33,19 @@ app.get('/api/demo', (request, response) => {
     // res.send('Hello World!')
   })
 
-  app.post('/create/user', (req, res) => {
-    console.log("req body => ", req.body)
-    const { name, age } = req.body;
-    console.log('name => ', name, 'age => ', age);
-    res.send('create user');
-    // res.send('Hello World!')
-  })
+//   app.post('/create/user', (req, res) => {
+//     console.log("req body => ", req.body)
+//     const { name, age } = req.body;
+//     console.log('name => ', name, 'age => ', age);
+//     res.send('create user');
+//     // res.send('Hello World!')
+//   })
+
+app.get('/users', get_users);
+
+
+app.post('/user/create', create_user);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
